@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const Slider = () => {
-  const [sliderData, setSliderData] = useState([]);
-
-  useEffect(() => {
-    
-  }, []);
+  const { data } = useQuery({
+    queryKey: ["slider"],
+    queryFn: async () => {
+      const res = await axios("slider.json");
+      return res.data;
+    },
+  });
+  console.log(data)
   return (
     <div>
       <Swiper
