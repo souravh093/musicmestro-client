@@ -42,7 +42,7 @@ const Header = () => {
                 </div>
               ) : (
                 <li>
-                  <NavLink to="/">Login</NavLink>
+                  <NavLink to="/login">Login</NavLink>
                 </li>
               )}
               <button
