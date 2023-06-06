@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import 'swiper/css/pagination';
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Container from "../../../components/Shared/Container/Container";
@@ -17,15 +17,18 @@ const Slider = () => {
       return res.data;
     },
   });
-  console.log(sliderData);
   return (
     <div className="py-10">
       <Container>
         <Swiper
           loop={true}
           pagination={{ clickable: true }}
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           className="mySwiper"
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false, 
+          }}
         >
           {sliderData.map((slider) => (
             <SwiperSlide key={slider.id}>

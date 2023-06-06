@@ -1,12 +1,17 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../../../components/Logo/Logo";
 import Container from "../../../components/Shared/Container/Container";
 import ProfileImage from "./ProfileImage/ProfileImage";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Header = () => {
-  // TODO-it come from authProvider
-  const user = false;
+  const { user, logoutUser } = useContext(AuthContext);
+
+  const signOutUser = () => {
+    logoutUser()
+  }
+
   const navigation = (
     <>
       <li>
@@ -25,9 +30,9 @@ const Header = () => {
     <div className="py-2 border-b-2">
       <Container>
         <div className="flex justify-between items-center">
-          <div>
+          <Link to="/">
             <Logo />
-          </div>
+          </Link>
           <div className="flex list-none gap-10">{navigation}</div>
           <div className="flex gap-10 list-none">
             <div className="flex gap-4 items-center">
@@ -38,6 +43,9 @@ const Header = () => {
                   </li>
                   <li>
                     <ProfileImage />
+                  </li>
+                  <li>
+                    <button onClick={signOutUser}>Logout</button>
                   </li>
                 </div>
               ) : (
