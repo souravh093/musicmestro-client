@@ -8,6 +8,8 @@ const Sidebar = () => {
                 <img className='w-16' src={logo} alt="logo" />
                 <h2 className='text-2xl font-bold text-gray-100 overflow-hidden'>MusicMaestro</h2>
             </div>
+
+            
         </div>
     );
 };
