@@ -6,6 +6,7 @@ import loginImage from "../../assets/login.jpg";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { saveUser } from "../../api/auth";
 
 const Login = () => {
   const { loginUser, googleLoginUser } = useContext(AuthContext);
@@ -27,6 +28,7 @@ const Login = () => {
   const loginWithGoogle = () => {
     googleLoginUser().then((result) => {
       console.log(result.user);
+      saveUser(result.user)
       toast.success("Successfully Login with Google");
       navigate("/");
     });

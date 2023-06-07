@@ -39,7 +39,7 @@ const Header = () => {
               {user ? (
                 <div className="flex items-center gap-2">
                   <li>
-                    <NavLink>Dashboard</NavLink>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                   </li>
                   <li>
                     <ProfileImage />

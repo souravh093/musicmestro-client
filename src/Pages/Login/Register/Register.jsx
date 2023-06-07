@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-hot-toast";
+import { saveUser } from "../../../api/auth";
 
 const Register = () => {
   const { createUser, googleLoginUser, updateUser } = useContext(AuthContext);
@@ -27,6 +28,7 @@ const Register = () => {
         updateUser(data.name, data.photoUrl).then((result) => {
           console.log(result.user);
         });
+        saveUser(result.user)
         toast.success("Successfully Sign Up");
         navigate("/");
       })

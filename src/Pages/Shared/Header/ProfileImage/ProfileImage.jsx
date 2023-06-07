@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import profileImage from "../../../../assets/profileImage.jpg"
+import { AuthContext } from "../../../../Provider/AuthProvider";
 
 const ProfileImage = () => {
-  const user = false
+  const {user} = useContext(AuthContext);
   return (
     <img
       className="rounded-full"
