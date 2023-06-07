@@ -1,0 +1,44 @@
+[
+  {
+    "image": "https://images.unsplash.com/photo-1453738773917-9c3eff1db985?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "name": "Pop Singing",
+    "instructorName": "Emma Thompson",
+    "availableSeats": 12,
+    "price": 250
+  },
+  {
+    "image": "https://cdn.pixabay.com/photo/2013/12/15/18/55/dj-228999_1280.jpg",
+    "name": "Rap Singing",
+    "instructorName": "Michael Johnson",
+    "availableSeats": 8,
+    "price": 200
+  },
+  {
+    "image": "https://cdn.pixabay.com/photo/2017/11/07/00/22/guitar-2925282_1280.jpg",
+    "name": "Rock Singing",
+    "instructorName": "Alex Davis",
+    "availableSeats": 15,
+    "price": 220
+  },
+  {
+    "image": "https://cdn.pixabay.com/photo/2018/03/27/00/33/music-3264716_1280.jpg",
+    "name": "Jazz Singing",
+    "instructorName": "Sophia Miller",
+    "availableSeats": 10,
+    "price": 180
+  },
+  {
+    "image": "https://cdn.pixabay.com/photo/2016/12/16/15/08/guitar-1911580_1280.jpg",
+    "name": "Country Singing",
+    "instructorName": "Oliver Wilson",
+    "availableSeats": 10,
+    "price": 200
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    "name": "Musical Theater",
+    "instructorName": "Grace Roberts",
+    "availableSeats": 15,
+    "price": 240
+  }
+]

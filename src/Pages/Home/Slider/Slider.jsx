@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import 'swiper/css/pagination';
+import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Container from "../../../components/Shared/Container/Container";
 
-import { SiMinutemailer } from 'react-icons/si';
+import { SiMinutemailer } from "react-icons/si";
 
 const Slider = () => {
   const { data: sliderData = [] } = useQuery({
@@ -26,8 +26,8 @@ const Slider = () => {
           modules={[Pagination, Autoplay]}
           className="mySwiper"
           autoplay={{
-            delay: 3000,
-            disableOnInteraction: false, 
+            delay: 5000,
+            disableOnInteraction: false,
           }}
         >
           {sliderData.map((slider) => (
@@ -37,10 +37,16 @@ const Slider = () => {
                   <h2 className="text-4xl font-semibold">{slider.subtitle}</h2>
                   <h1 className="text-7xl font-bold mb-5">{slider.title}</h1>
                   <p className="text-lg max-w-xl mb-5">{slider.description}</p>
-                  <button className="bg-violet-700 flex items-center gap-3 text-gray-200 py-3 px-10 rounded-2xl">Discover More <SiMinutemailer /> </button>
+                  <button className="bg-violet-700 flex items-center gap-3 text-gray-200 py-3 px-10 rounded-2xl">
+                    Discover More <SiMinutemailer />{" "}
+                  </button>
                 </div>
                 <div>
-                  <img className="w-full h-[40rem] object-contain" src={slider.image} alt="" />
+                  <img
+                    className="w-full h-[40rem] object-contain"
+                    src={slider.image}
+                    alt=""
+                  />
                 </div>
               </div>
             </SwiperSlide>
