@@ -31,3 +31,18 @@ export const becomeAdmin = (email) => {
     body: JSON.stringify(currentUser),
   }).then((res) => res.json());
 };
+
+// become a instructor
+export const becomeInstructor = (email) => {
+  const currentUser = {
+    instructor: true,
+  };
+
+  return fetch(`${import.meta.env.VITE_BASE_URL}/users/${email}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(currentUser),
+  }).then((res) => res.json());
+};

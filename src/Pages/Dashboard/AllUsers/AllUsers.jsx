@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "../../../components/Title/Title";
 import { useQuery } from "react-query";
+import BecomeAdminModal from "../../../components/Modal/BecomeAdminModal";
+import { becomeAdmin, becomeInstructor } from "../../../api/auth";
+import { toast } from "react-hot-toast";
+import BecomeInstructorModal from "../../../components/Modal/BecomeInstructorModal";
 
 const AllUsers = () => {
+  const [modalAdmin, setModalAdmin] = useState(false);
+  const [modalInstructor, setModalInstructor] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const modalHandlerAdmin = (email) => {
+    becomeAdmin(email).then((data) => {
+      console.log(data);
+      toast.success("This user Admin successfully");
+      closeModalAdmin();
+    });
+  };
+
+  const modalHandlerInstructor = (email) => {
+    becomeInstructor(email).then((data) => {
+      console.log(data);
+      toast.success("This user Instructor successfully");
+      closeModalInstructor();
+    });
+  };
+
+  const closeModalAdmin = () => {
+    setModalAdmin(false);
+  };
+
+  const closeModalInstructor = () => {
+    setModalInstructor(false);
+  };
   const { isLoading, data: users = [] } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
@@ -12,6 +43,7 @@ const AllUsers = () => {
   if (isLoading) {
     <h2>Loading...</h2>;
   }
+  console.log(modalAdmin);
   return (
     <div>
       <Title
@@ -49,17 +81,47 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <th>
-                  <button className="btn btn-xs mr-3 bg-violet-700 hover:bg-violet-600 text-white">Make Instructor</button>
-                  <button className="btn btn-xs bg-violet-700 hover:bg-violet-600 text-white">Make Admin</button>
+                  <button
+                    onClick={() => {
+                      setEmail(user.email);
+                      setModalInstructor(true);
+                    }}
+                    className="btn btn-xs mr-3 bg-violet-700 hover:bg-violet-600 text-white"
+                  >
+                    Make Instructor
+                  </button>
+                  <button
+                    onClick={() => {
+                      setModalAdmin(true);
+                      setEmail(user.email);
+                    }}
+                    className="btn btn-xs bg-violet-700 hover:bg-violet-600 text-white"
+                  >
+                    Make Admin
+                  </button>
                 </th>
                 <th>
-                  <button className="btn btn-xs bg-red-500 text-white">Remove User</button>
+                  <button className="btn btn-xs bg-red-500 text-white">
+                    Remove User
+                  </button>
                 </th>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <BecomeAdminModal
+        modalHandler={modalHandlerAdmin}
+        email={email}
+        isOpen={modalAdmin}
+        closeModal={closeModalAdmin}
+      />
+      <BecomeInstructorModal
+        modalHandler={modalHandlerInstructor}
+        email={email}
+        isOpen={modalInstructor}
+        closeModal={closeModalInstructor}
+      />
     </div>
   );
 };
