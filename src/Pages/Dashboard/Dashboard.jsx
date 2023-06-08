@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { AuthContext } from "../../Provider/AuthProvider";
 import AdminMenu from "./DashboardMenu/AdminMenu";
@@ -7,7 +7,13 @@ import InstructorMenu from "./DashboardMenu/InstructorMenu";
 import StudentMenu from "./DashboardMenu/StudentMenu";
 
 const Dashboard = () => {
-  const { user, adminRole, instructorRole } = useContext(AuthContext);
+  const { user, adminRole, instructorRole, logoutUser } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const signOutUser = () => {
+    logoutUser();
+    navigate("/");
+  };
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -48,14 +54,38 @@ const Dashboard = () => {
         className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-          {adminRole ? (
-            <AdminMenu />
-          ) : instructorRole ? (
-            <InstructorMenu />
-          ) : (
-            <StudentMenu />
-          )}
+        <div className="h-full px-3 pb-4 overflow-y-auto flex flex-col justify-between bg-white dark:bg-gray-800">
+          <div>
+            {adminRole ? (
+              <AdminMenu />
+            ) : instructorRole ? (
+              <InstructorMenu />
+            ) : (
+              <StudentMenu />
+            )}
+          </div>
+          <ul className="space-y-2 font-medium ">
+            {!adminRole ||
+              (!instructorRole && (
+                <li>
+                  <NavLink
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700`}
+                  >
+                    <span className="ml-3">Select Classes</span>
+                  </NavLink>
+                </li>
+              ))}
+            <li>
+              <NavLink
+                onClick={signOutUser}
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700`}
+              >
+                <button>
+                  <span className="ml-3">Logout</span>
+                </button>
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </aside>
 
@@ -67,15 +97,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-{
-  /* <div className="grid grid-cols-7">
-      <div className="col-span-1">
-        <Sidebar />
-      </div>
-      <div className="col-span-6 bg-gray-200">
-        <DashboardHeader />
-        <Outlet />
-      </div>
-    </div> */
-}

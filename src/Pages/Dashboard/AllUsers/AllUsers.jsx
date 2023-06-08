@@ -7,6 +7,8 @@ import { toast } from "react-hot-toast";
 import BecomeInstructorModal from "../../../components/Modal/BecomeInstructorModal";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const AllUsers = () => {
   const { user, loading } = useContext(AuthContext);
@@ -18,7 +20,7 @@ const AllUsers = () => {
   const modalHandlerAdmin = (email) => {
     becomeAdmin(email).then((data) => {
       console.log(data);
-      refetch()
+      refetch();
       toast.success("This user Admin successfully");
       closeModalAdmin();
     });
@@ -27,7 +29,7 @@ const AllUsers = () => {
   const modalHandlerInstructor = (email) => {
     becomeInstructor(email).then((data) => {
       console.log(data);
-      refetch()
+      refetch();
       toast.success("This user Instructor successfully");
       closeModalInstructor();
     });
@@ -45,11 +47,31 @@ const AllUsers = () => {
     queryKey: ["users", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure(`/users`)
-      return res.data
-    }
+      const res = await axiosSecure(`/users`);
+      return res.data;
+    },
   });
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${import.meta.env.VITE_BASE_URL}/users/${id}`)
+          .then((data) => {
+            refetch();
+            console.log(data);
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -93,7 +115,10 @@ const AllUsers = () => {
                       setEmail(user.email);
                       setModalInstructor(true);
                     }}
-                    className="btn btn-xs mr-3 bg-violet-700 hover:bg-violet-600 text-white"
+                    className={`btn btn-xs bg-violet-700 hover:bg-violet-600 text-white ${
+                      user.instructor ? "cursor-not-allowed  opacity-50" : ""
+                    }`}
+                    disabled={user.instructor}
                   >
                     Make Instructor
                   </button>
@@ -111,7 +136,10 @@ const AllUsers = () => {
                   </button>
                 </th>
                 <th>
-                  <button className="btn btn-xs bg-red-500 text-white">
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn btn-xs hover:border hover:text-gray-800 bg-red-500 text-white"
+                  >
                     Remove User
                   </button>
                 </th>

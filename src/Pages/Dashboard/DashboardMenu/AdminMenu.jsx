@@ -10,7 +10,7 @@ const AdminMenu = () => {
           to="/dashboard"
           className={({ isActive }) =>
             `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
-              isActive ? "bg-gray-300 text-gray-800" : "text-gray-600"
+              isActive ? "border-2 text-gray-800" : "text-gray-600"
             }`
           }
         >
@@ -22,7 +22,7 @@ const AdminMenu = () => {
           to="/dashboard/allusers"
           className={({ isActive }) =>
             `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
-              isActive ? "bg-gray-300 text-gray-800" : "text-gray-600"
+              isActive ? "border-2 text-gray-800" : "text-gray-600"
             }`
           }
         >
