@@ -6,8 +6,8 @@ import { Autoplay, Pagination } from "swiper";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Container from "../../../components/Shared/Container/Container";
-
 import { SiMinutemailer } from "react-icons/si";
+import bg from "../../../assets/bg.jpg"
 
 const Slider = () => {
   const { data: sliderData = [] } = useQuery({
@@ -18,7 +18,7 @@ const Slider = () => {
     },
   });
   return (
-    <div className="py-10">
+    <div className="py-10"  style={{ backgroundImage: `url(${bg})` }}>
       <Container>
         <Swiper
           loop={true}
