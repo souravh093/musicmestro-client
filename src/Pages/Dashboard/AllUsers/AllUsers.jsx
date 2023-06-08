@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Title from "../../../components/Title/Title";
 import { useQuery } from "react-query";
 import BecomeAdminModal from "../../../components/Modal/BecomeAdminModal";
 import { becomeAdmin, becomeInstructor } from "../../../api/auth";
 import { toast } from "react-hot-toast";
 import BecomeInstructorModal from "../../../components/Modal/BecomeInstructorModal";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 
 const AllUsers = () => {
+  const { user, loading } = useContext(AuthContext);
   const [modalAdmin, setModalAdmin] = useState(false);
   const [modalInstructor, setModalInstructor] = useState(false);
   const [email, setEmail] = useState("");
+  const [axiosSecure] = useAxiosSecure();
 
   const modalHandlerAdmin = (email) => {
     becomeAdmin(email).then((data) => {
       console.log(data);
+      refetch()
       toast.success("This user Admin successfully");
       closeModalAdmin();
     });
@@ -22,6 +27,7 @@ const AllUsers = () => {
   const modalHandlerInstructor = (email) => {
     becomeInstructor(email).then((data) => {
       console.log(data);
+      refetch()
       toast.success("This user Instructor successfully");
       closeModalInstructor();
     });
@@ -34,16 +40,17 @@ const AllUsers = () => {
   const closeModalInstructor = () => {
     setModalInstructor(false);
   };
-  const { isLoading, data: users = [] } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_BASE_URL}/users`).then((res) => res.json()),
+
+  const { data: allUsers = [], refetch } = useQuery({
+    queryKey: ["users", user?.email],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure(`/users`)
+      return res.data
+    }
   });
 
-  if (isLoading) {
-    <h2>Loading...</h2>;
-  }
-  console.log(modalAdmin);
+
   return (
     <div>
       <Title
@@ -63,7 +70,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {allUsers.map((user, index) => (
               <tr key={user._id}>
                 <td>{index + 1}</td>
                 <td>
@@ -95,7 +102,10 @@ const AllUsers = () => {
                       setModalAdmin(true);
                       setEmail(user.email);
                     }}
-                    className="btn btn-xs bg-violet-700 hover:bg-violet-600 text-white"
+                    className={`btn btn-xs bg-violet-700 hover:bg-violet-600 text-white ${
+                      user.admin ? "cursor-not-allowed  opacity-50" : ""
+                    }`}
+                    disabled={user.admin}
                   >
                     Make Admin
                   </button>

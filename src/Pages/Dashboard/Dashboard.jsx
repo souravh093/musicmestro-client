@@ -7,8 +7,7 @@ import InstructorMenu from "./DashboardMenu/InstructorMenu";
 import StudentMenu from "./DashboardMenu/StudentMenu";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
-  const role = "admin";
+  const { user, adminRole, instructorRole } = useContext(AuthContext);
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -50,9 +49,9 @@ const Dashboard = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-          {role && role === "admin" ? (
+          {adminRole ? (
             <AdminMenu />
-          ) : role && role === "instructor" ? (
+          ) : instructorRole ? (
             <InstructorMenu />
           ) : (
             <StudentMenu />

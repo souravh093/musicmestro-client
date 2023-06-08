@@ -46,3 +46,19 @@ export const becomeInstructor = (email) => {
     body: JSON.stringify(currentUser),
   }).then((res) => res.json());
 };
+
+// get user role
+export const getAdminRole = async (email) => {
+  const res = await fetch(`${import.meta.env.VITE_BASE_URL}/users/${email}`);
+  const user = await res.json();
+  return user?.admin;
+};
+
+export const getInstructorRole = async (email) => {
+  const res = await fetch(`${import.meta.env.VITE_BASE_URL}/users/${email}`);
+  const user = await res.json();
+  return user?.instructor;
+};
+
+
+
