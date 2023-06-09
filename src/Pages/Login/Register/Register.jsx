@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-hot-toast";
 import { saveUser } from "../../../api/auth";
+import axios from "axios";
+
+const imagToken = import.meta.env.VITE_UPLOAD_TOKEN;
 
 const Register = () => {
   const { createUser, googleLoginUser, updateUser } = useContext(AuthContext);
@@ -21,18 +24,39 @@ const Register = () => {
   const password = useRef({});
   password.current = watch("password", "");
 
+  const imageUrl = `https://api.imgbb.com/1/upload?key=${imagToken}`;
+
   const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("image", data.photoUrl[0]);
+
+    axios.post(imageUrl, formData)
+  .then((dataImage) => {
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        updateUser(data.name, data.photoUrl).then((result) => {
-          console.log(result.user);
-        });
-        saveUser(result.user)
-        toast.success("Successfully Sign Up");
-        navigate("/");
+        updateUser(data.name, dataImage.data.data.display_url)
+          .then(() => {
+            saveUser(result.user, dataImage.data.data.display_url); 
+            toast.success("Successfully Sign Up");
+            navigate("/");
+          })
+          .catch((error) => setError(error.message));
       })
       .catch((error) => setError(error.message));
+  });
+
+    // axios.post(imageUrl, formData).then((dataImage) => {
+    //   createUser(data.email, data.password)
+    //     .then((result) => {
+    //       console.log(result.user);
+    //       updateUser(data.name, dataImage.data.data.display_url);
+    //       saveUser(result.user);
+    //       toast.success("Successfully Sign Up");
+    //       navigate("/");
+    //     })
+    //     .catch((error) => setError(error.message));
+    // });
   };
 
   const signUpWithGoogle = () => {
@@ -164,7 +188,7 @@ const Register = () => {
               Photo URL
             </label>
             <input
-              type="text"
+              type="file"
               id="photo-url"
               {...register("photoUrl", { required: "Photo URL is required" })}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
@@ -172,9 +196,7 @@ const Register = () => {
               }`}
             />
             {errors.photoUrl && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.photoUrl.message}
-              </p>
+              <p className="text-red-500 text-xs mt-1">Photo URL is required</p>
             )}
           </div>
           <div className="mb-6">

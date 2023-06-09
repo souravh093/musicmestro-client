@@ -16,8 +16,8 @@ const ClassesCard = ({ data }) => {
           </p>
           <p className="text-gray-700 mb-2 font-bold text-2xl">Price: <span className="text-violet-700">${price}</span></p>
         </div>
-        <button className="btn bg-violet-700 text-gray-100 mt-4">
-          Select This Course
+        <button className="btn bg-violet-700 hover:bg-violet-600 text-gray-100 mt-4">
+          Join Now
         </button>
       </div>
     </div>

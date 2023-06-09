@@ -16,13 +16,13 @@ const Dashboard = () => {
   };
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <nav className="fixed top-0 z-50 w-full border-b bg-gray-800 border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <Link to="/" className="flex ml-2 md:mr-24">
                 <img src={logo} className="h-8 mr-3" alt="Logo" />
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">
                   MusicMaestro
                 </span>
               </Link>
@@ -33,7 +33,7 @@ const Dashboard = () => {
                   <h2 className="text-gray-100">{user?.displayName}</h2>
                   <button
                     type="button"
-                    className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    className="flex text-sm bg-gray-800 rounded-full focus:ring-4  focus:ring-gray-600"
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
@@ -51,10 +51,10 @@ const Dashboard = () => {
 
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0 bg-gray-800 border-gray-700"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto flex flex-col justify-between bg-white dark:bg-gray-800">
+        <div className="h-full px-3 pb-4 overflow-y-auto flex flex-col justify-between bg-gray-800">
           <div>
             {adminRole ? (
               <AdminMenu />
@@ -65,11 +65,11 @@ const Dashboard = () => {
             )}
           </div>
           <ul className="space-y-2 font-medium ">
-            {!adminRole ||
+            {!adminRole &&
               (!instructorRole && (
                 <li>
                   <NavLink
-                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700`}
+                    className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
                   >
                     <span className="ml-3">Select Classes</span>
                   </NavLink>
@@ -78,7 +78,7 @@ const Dashboard = () => {
             <li>
               <NavLink
                 onClick={signOutUser}
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700`}
+                className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
               >
                 <button>
                   <span className="ml-3">Logout</span>

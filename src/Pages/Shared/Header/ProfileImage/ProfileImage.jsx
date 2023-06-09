@@ -6,12 +6,10 @@ const ProfileImage = () => {
   const {user} = useContext(AuthContext);
   return (
     <img
-      className="rounded-full"
+      className="rounded-full object-cover w-12 h-12"
       referrerPolicy="no-referrer"
       src={user && user.photoURL ? user.photoURL : profileImage}
       alt="profile image in header"
-      height="32"
-      width="32"
     />
   );
 };

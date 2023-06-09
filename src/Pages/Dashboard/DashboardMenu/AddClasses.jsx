@@ -45,7 +45,7 @@ const AddClasses = () => {
             price: parseFloat(price),
             instructorEmail,
             instructorName,
-            availableSeats,
+            availableSeats: parseFloat(availableSeats),
             status: "pending"
           };
 
