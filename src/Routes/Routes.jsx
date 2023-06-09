@@ -9,6 +9,8 @@ import AddClasses from "../Pages/Dashboard/DashboardMenu/AddClasses";
 import InstructorAddedClass from "../Pages/Dashboard/DashboardMenu/InstructorAddedClass";
 import AllClasses from "../Pages/Dashboard/DashboardMenu/AllClasses";
 import DashboardHome from "../Pages/Dashboard/DashboardMenu/DashboardHome";
+import Classes from "../Pages/Classes/Classes";
+import Instructors from "../Pages/Instructors/Instructors";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />
+      }, 
+      {
+        path: "/classes",
+        element: <Classes />
+      },
+      {
+        path: "/instructors",
+        element: <Instructors />
       }
     ],
   },
