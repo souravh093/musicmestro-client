@@ -29,6 +29,18 @@ const AdminMenu = () => {
           <span className="flex-1 ml-3 whitespace-nowrap">All Users</span>
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/dashboard/allclasses"
+          className={({ isActive }) =>
+            `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
+              isActive ? "border-2 text-gray-800" : "text-gray-600"
+            }`
+          }
+        >
+          <span className="flex-1 ml-3 whitespace-nowrap">All Classes</span>
+        </NavLink>
+      </li>
     </ul>
   );
 };

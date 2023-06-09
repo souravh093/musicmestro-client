@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Container from "../../components/Shared/Container/Container";
 import loginImage from "../../assets/login.jpg";
@@ -11,6 +11,10 @@ import { saveUser } from "../../api/auth";
 const Login = () => {
   const { loginUser, googleLoginUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/"
+
   const {
     register,
     handleSubmit,
@@ -30,7 +34,7 @@ const Login = () => {
       console.log(result.user);
       saveUser(result.user)
       toast.success("Successfully Login with Google");
-      navigate("/");
+      navigate(from, {replace: true});
     });
   };
   return (
