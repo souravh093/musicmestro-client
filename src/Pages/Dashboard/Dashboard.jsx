@@ -68,7 +68,7 @@ const Dashboard = () => {
             {!adminRole &&
               (!instructorRole && (
                 <li>
-                  <NavLink
+                  <NavLink to="/classes"
                     className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
                   >
                     <span className="ml-3">Select Classes</span>

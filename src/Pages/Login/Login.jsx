@@ -25,7 +25,7 @@ const Login = () => {
     loginUser(data.email, data.password).then((result) => {
       console.log(result.user);
       toast.success("Successfully Login");
-      navigate("/");
+      navigate(from, {replace: true});
     });
   };
 

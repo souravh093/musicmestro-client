@@ -2,29 +2,64 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCart } from "../../../hook/useCart";
 
 const ClassesCard = ({ data, refetch }) => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { image, _id, className, instructorName, availableSeats, price } = data;
+  const [, cartRefetch] = useCart();
 
   const handleClass = (id) => {
+
+    
+
     if (!user) {
-      toast.error("Please Login/Sign up First");
+      Swal.fire({
+        title: "Please login to order the food",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login now",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
       return;
     }
-    if (user) {
+    if (user && user.email) {
+      const classItem = {
+        classItemId: _id,
+        name: className,
+        price,
+        instructorName,
+        email: user?.email,
+        image
+      };
+      axios
+        .post(`${import.meta.env.VITE_BASE_URL}/carts`, classItem)
+        .then((cartData) => {
+          cartRefetch()
+          console.log(cartData);
+        });
+
       axios
         .put(`${import.meta.env.VITE_BASE_URL}/decreaseclasses/${id}`)
         .then((classData) => {
           if (classData.data.modifiedCount > 0) {
-            toast.success("Successfully book class");
             refetch();
+            toast.success("Successfully booked class");
           }
           console.log(classData.data);
         });
     }
   };
 
-  const { image, _id, className, instructorName, availableSeats, price } = data;
   return (
     <div className="card w-full bg-base-100 shadow-xl group">
       <figure>
@@ -51,7 +86,7 @@ const ClassesCard = ({ data, refetch }) => {
           onClick={() => handleClass(_id)}
           className="btn bg-violet-700 hover:bg-violet-600 text-gray-100 mt-4"
         >
-          Join Now
+          Enroll Now
         </button>
       </div>
     </div>

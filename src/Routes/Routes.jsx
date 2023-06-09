@@ -11,6 +11,7 @@ import AllClasses from "../Pages/Dashboard/DashboardMenu/AllClasses";
 import DashboardHome from "../Pages/Dashboard/DashboardMenu/DashboardHome";
 import Classes from "../Pages/Classes/Classes";
 import Instructors from "../Pages/Instructors/Instructors";
+import StudentBookedClasses from "../Pages/Dashboard/DashboardMenu/StudentBookedClasses";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "addedclasses",
         element: <InstructorAddedClass />
+      },
+      {
+        path: "studentclasses",
+        element: <StudentBookedClasses />
       }
     ]
   }
