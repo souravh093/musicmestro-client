@@ -93,6 +93,10 @@ const CheckoutForm = ({ classInfo, closeModal }) => {
               console.log(res.data);
             });
 
+            axiosSecure.put("/totalenrollstudent", paymentInfo).then((res) => {
+              console.log(res.data);
+            });
+
             closeModal();
           }
         });

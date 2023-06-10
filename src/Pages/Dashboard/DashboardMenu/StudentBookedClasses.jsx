@@ -13,8 +13,8 @@ const StudentBookedClasses = () => {
   const [carts, cartRefetch] = useCart();
   const [axiosSecure] = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
-  
-    const totalPrice = carts?.reduce((acc, cur) => cur.price + acc, 0);
+
+  const totalPrice = carts?.reduce((acc, cur) => cur.price + acc, 0);
 
   const [classInfo, setClassInfo] = useState({
     student: {
@@ -29,13 +29,6 @@ const StudentBookedClasses = () => {
     status: "Classes start soon",
     className: carts.map((cart) => cart.name),
   });
-
-  // useEffect(() => {
-  //   setClassInfo((p) => ({
-  //     ...p,
-  //     price: totalPrice,
-  //   }));
-  // }, [carts]);
 
   const closeModal = () => {
     setIsOpen(false);

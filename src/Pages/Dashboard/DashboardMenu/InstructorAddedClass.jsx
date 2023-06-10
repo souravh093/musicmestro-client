@@ -26,7 +26,7 @@ const InstructorAddedClass = () => {
   return (
     <>
       <Title
-        title={"Your All Classes"}
+        title={"My Classes"}
         subTitle={"Here is your all Classes you added"}
       />
       <div className="overflow-x-auto">
@@ -66,7 +66,7 @@ const InstructorAddedClass = () => {
                 <td>{classes?.instructorName}</td>
                 <td>${classes?.price}</td>
                 <td>{classes?.availableSeats}</td>
-                <td>{0}</td>
+                <td>{classes?.totalEnrollStudent || 0}</td>
                 <td
                   className={`font-bold ${
                     classes?.status === "pending"

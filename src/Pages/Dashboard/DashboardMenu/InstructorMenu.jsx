@@ -40,7 +40,7 @@ const InstructorMenu = () => {
             }`
           }
         >
-          <span className="flex-1 ml-3 whitespace-nowrap flex gap-2 items-center"><GiLoveSong />Your All Classes</span>
+          <span className="flex-1 ml-3 whitespace-nowrap flex gap-2 items-center"><GiLoveSong />My Classes</span>
         </NavLink>
       </li>
     </ul>
