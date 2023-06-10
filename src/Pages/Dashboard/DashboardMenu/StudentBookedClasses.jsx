@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useCart } from "../../../hook/useCart";
 import Title from "../../../components/Title/Title";
 import Container from "../../../components/Shared/Container/Container";
@@ -6,18 +6,30 @@ import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import CheckoutModal from "../../../components/Modal/CheckoutModal";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const StudentBookedClasses = () => {
+  const { user } = useContext(AuthContext);
   const [carts, cartRefetch] = useCart();
   const [axiosSecure] = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
 
-  const totalPrice = carts.reduce((acc, cur) => cur.price + acc, 0);
-  console.log(totalPrice);
+  const totalPrice = carts?.reduce((acc, cur) => cur.price + acc, 0);
 
-  const [checkOutPrice, setCheckOutPrice] = useState({
+  const [classInfo, setClassInfo] = useState({
+    student: {
+      name: user?.displayName,
+      email: user?.email,
+      image: user?.photoURL,
+    },
     price: totalPrice,
+    quantity: carts.length,
+    cartItems: carts.map((cart) => cart._id),
+    classItemsId: carts.map((cart) => cart.classItemId),
+    status: "Classes start soon",
+    className: carts.map((cart) => cart.name),
   });
+
 
   const closeModal = () => {
     setIsOpen(false);
@@ -63,7 +75,9 @@ const StudentBookedClasses = () => {
                   <h2 className="text-xl">Total Price: ${totalPrice}</h2>
                 </div>
                 <div>
-                  <button onClick={() => setIsOpen(true)} className="btn">Pay</button>
+                  <button onClick={() => setIsOpen(true)} className="btn">
+                    Pay
+                  </button>
                 </div>
               </div>
 
@@ -117,7 +131,7 @@ const StudentBookedClasses = () => {
       </Container>
       <CheckoutModal
         isOpen={isOpen}
-        checkOutPrice={checkOutPrice}
+        classInfo={classInfo}
         closeModal={closeModal}
       />
     </div>

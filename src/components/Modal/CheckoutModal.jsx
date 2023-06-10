@@ -5,8 +5,8 @@ import { Fragment } from "react";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 const stripePromise = loadStripe(`${import.meta.env.VITE_PAYMENT_GATEWAY_PK}`);
 
-const CheckoutModal = ({ checkOutPrice, closeModal, isOpen }) => {
-    console.log(checkOutPrice)
+const CheckoutModal = ({ classInfo, closeModal, isOpen }) => {
+  console.log(classInfo.price);
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -34,12 +34,10 @@ const CheckoutModal = ({ checkOutPrice, closeModal, isOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-
                 {/* checkout form */}
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm checkOutPrice={checkOutPrice} closeModal={closeModal} />
+                  <CheckoutForm classInfo={classInfo} closeModal={closeModal} />
                 </Elements>
-                
               </Dialog.Panel>
             </Transition.Child>
           </div>
