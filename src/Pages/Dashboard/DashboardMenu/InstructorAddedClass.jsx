@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Title from "../../../components/Title/Title";
 import { useQuery } from "react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
+import ShowFeedBackModal from "../../../components/Modal/ShowFeedBackModal";
 
 const InstructorAddedClass = () => {
   const { loading, user } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
+  const [modalFeedback, setModalFeedback] = useState(false);
+  const [feedback, setFeedback] = useState("");
   const { data: instructorClasses = [] } = useQuery({
     queryKey: ["classes"],
     enabled: !loading,
@@ -15,7 +18,11 @@ const InstructorAddedClass = () => {
       return res.data;
     },
   });
-  console.log(instructorClasses)
+  console.log(instructorClasses);
+
+  const closeModalFeedback = () => {
+    setModalFeedback(false);
+  };
   return (
     <>
       <Title
@@ -56,24 +63,50 @@ const InstructorAddedClass = () => {
                     </div>
                   </div>
                 </td>
-                <td>
-                  {classes?.instructorName}
-                </td>
+                <td>{classes?.instructorName}</td>
                 <td>${classes?.price}</td>
                 <td>{classes?.availableSeats}</td>
                 <td>{0}</td>
-                <td>{classes?.status}</td>
+                <td
+                  className={`font-bold ${
+                    classes?.status === "pending"
+                      ? "text-orange-400"
+                      : classes?.status === "approved"
+                      ? "text-sky-500"
+                      : classes?.status === "deny"
+                      ? "text-red-700"
+                      : ""
+                  }`}
+                >
+                  {classes?.status}
+                </td>
                 <th>
-                  <button className="btn bg-red-500 text-gray-50 btn-xs">Update</button>
+                  <button className="btn bg-red-500 hover:bg-red-600 text-gray-50 btn-xs">
+                    Update
+                  </button>
                 </th>
                 <th>
-                  <button className="btn bg-red-500 text-gray-50 btn-xs">FeedBack</button>
+                  <button
+                    onClick={() => {
+                      setModalFeedback(true);
+                      setFeedback(classes?.feedback?.feedback);
+                    }}
+                    className="btn bg-red-500 hover:bg-red-600 text-gray-50 btn-xs"
+                  >
+                    Show FeedBack
+                  </button>
                 </th>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      <ShowFeedBackModal
+        isOpen={modalFeedback}
+        closeModal={closeModalFeedback}
+        feedback={feedback}
+      />
     </>
   );
 };
