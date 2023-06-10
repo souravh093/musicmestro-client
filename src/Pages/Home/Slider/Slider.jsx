@@ -32,12 +32,12 @@ const Slider = () => {
         >
           {sliderData.map((slider) => (
             <SwiperSlide key={slider.id}>
-              <div className="grid grid-cols-2 items-center justify-between">
+              <div className="grid md:grid-cols-2 items-center justify-between">
                 <div>
-                  <h2 className="text-4xl font-semibold">{slider.subtitle}</h2>
-                  <h1 className="text-7xl font-bold mb-5">{slider.title}</h1>
-                  <p className="text-lg max-w-xl mb-5">{slider.description}</p>
-                  <button className="bg-violet-700 flex items-center gap-3 text-gray-200 py-3 px-10 rounded-2xl">
+                  <h2 className="text-4xl font-semibold dark:text-black">{slider.subtitle}</h2>
+                  <h1 className="text-7xl font-bold mb-5 dark:text-black">{slider.title}</h1>
+                  <p className="text-lg max-w-xl mb-5 dark:text-black">{slider.description}</p>
+                  <button className="bg-violet-700 dark:hover:shadow-xl dark:bg-gray-800 flex items-center gap-3 text-gray-200 py-3 px-10 rounded-2xl">
                     Discover More <SiMinutemailer />{" "}
                   </button>
                 </div>

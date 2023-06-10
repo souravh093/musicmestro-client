@@ -45,16 +45,6 @@ const ClassesCard = ({ data }) => {
           toast.success("Successfully booked class");
           console.log(cartData);
         });
-
-      // TODO: implement with my payment method
-      // axios
-      //   .put(`${import.meta.env.VITE_BASE_URL}/decreaseclasses/${id}`)
-      //   .then((classData) => {
-      //     if (classData.data.modifiedCount > 0) {
-      //       refetch();
-      //     }
-      //     console.log(classData.data);
-      //   });
     }
   };
 
@@ -68,7 +58,7 @@ const ClassesCard = ({ data }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">Course Name: {className}</h2>
+        <h2 className="card-title text-gray-700">Course Name: {className}</h2>
         <p className="text-gray-700 mb-2 text-xl">
           Instructor Name: {instructorName}
         </p>
