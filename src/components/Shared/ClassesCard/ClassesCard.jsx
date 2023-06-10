@@ -6,17 +6,14 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../../../hook/useCart";
 
-const ClassesCard = ({ data, refetch }) => {
-  const { user } = useContext(AuthContext);
+const ClassesCard = ({ data }) => {
+  const { user, adminRole, instructorRole } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const { image, _id, className, instructorName, availableSeats, price } = data;
   const [, cartRefetch] = useCart();
 
-  const handleClass = (id) => {
-
-    
-
+  const handleClass = () => {
     if (!user) {
       Swal.fire({
         title: "Please login to order the food",
@@ -39,24 +36,25 @@ const ClassesCard = ({ data, refetch }) => {
         price,
         instructorName,
         email: user?.email,
-        image
+        image,
       };
       axios
         .post(`${import.meta.env.VITE_BASE_URL}/carts`, classItem)
         .then((cartData) => {
-          cartRefetch()
+          cartRefetch();
+          toast.success("Successfully booked class");
           console.log(cartData);
         });
 
-      axios
-        .put(`${import.meta.env.VITE_BASE_URL}/decreaseclasses/${id}`)
-        .then((classData) => {
-          if (classData.data.modifiedCount > 0) {
-            refetch();
-            toast.success("Successfully booked class");
-          }
-          console.log(classData.data);
-        });
+      // TODO: implement with my payment method
+      // axios
+      //   .put(`${import.meta.env.VITE_BASE_URL}/decreaseclasses/${id}`)
+      //   .then((classData) => {
+      //     if (classData.data.modifiedCount > 0) {
+      //       refetch();
+      //     }
+      //     console.log(classData.data);
+      //   });
     }
   };
 
@@ -83,6 +81,7 @@ const ClassesCard = ({ data, refetch }) => {
           </p>
         </div>
         <button
+          disabled={adminRole || instructorRole}
           onClick={() => handleClass(_id)}
           className="btn bg-violet-700 hover:bg-violet-600 text-gray-100 mt-4"
         >
