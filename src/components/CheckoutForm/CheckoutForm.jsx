@@ -13,19 +13,19 @@ const CheckoutForm = ({ classInfo, closeModal }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [axiosSecure] = useAxiosSecure();
 
-  console.log(classInfo.price)
+  console.log(classInfo.price);
 
   useEffect(() => {
+    console.log(classInfo.price);
 
-    if(classInfo?.price === 0) {
-      return
+    if (classInfo?.price === 0) {
+      return;
     }
     // generate client secret
     if (classInfo?.price) {
       axiosSecure
         .post("/create-payment-intent", { price: classInfo?.price })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -73,7 +73,7 @@ const CheckoutForm = ({ classInfo, closeModal }) => {
     } else {
       console.log("[PaymentMethod]", paymentMethod);
       if (paymentIntent.status === "succeeded") {
-        console.log("payment successfully")
+        console.log("payment successfully");
         // save payment information in database
         const paymentInfo = {
           ...classInfo,
@@ -82,12 +82,17 @@ const CheckoutForm = ({ classInfo, closeModal }) => {
         };
 
         axiosSecure.post("/payment", paymentInfo).then((res) => {
-          if (res.data.insertedId) {
+          if (res.data.insertResult.insertedId) {
             Swal.fire(
               "Payment Successfully",
               `Transaction ID: ${paymentIntent.id}`,
               "success"
             );
+
+            axiosSecure.put("/decreaseclass", paymentInfo).then((res) => {
+              console.log(res.data);
+            });
+
             closeModal();
           }
         });
