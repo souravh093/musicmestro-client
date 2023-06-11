@@ -1,4 +1,7 @@
 import React from "react";
+import { AiFillDashboard } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa";
+import { GiLoveSong } from "react-icons/gi";
 import { NavLink, } from "react-router-dom";
 
 
@@ -14,7 +17,7 @@ const AdminMenu = () => {
             }`
           }
         >
-          <span className="ml-3">Dashboard</span>
+          <span className="ml-3 flex gap-2 items-center"><AiFillDashboard  /> Dashboard</span>
         </NavLink>
       </li>
       <li>
@@ -26,7 +29,7 @@ const AdminMenu = () => {
             }`
           }
         >
-          <span className="flex-1 ml-3 whitespace-nowrap">All Users</span>
+          <span className="flex-1 ml-3 whitespace-nowrap flex gap-2 items-center"><FaUsers /> All Users</span>
         </NavLink>
       </li>
       <li>
@@ -38,7 +41,7 @@ const AdminMenu = () => {
             }`
           }
         >
-          <span className="flex-1 ml-3 whitespace-nowrap">All Classes</span>
+          <span className="flex-1 ml-3 whitespace-nowrap flex gap-2 item-center"><GiLoveSong />All Classes</span>
         </NavLink>
       </li>
     </ul>

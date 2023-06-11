@@ -4,13 +4,17 @@ import { useQuery } from "react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import ShowFeedBackModal from "../../../components/Modal/ShowFeedBackModal";
+import UpdateByInstructorModal from "../../../components/Modal/UpdateByInstructorModal";
 
 const InstructorAddedClass = () => {
   const { loading, user } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
   const [modalFeedback, setModalFeedback] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const { data: instructorClasses = [] } = useQuery({
+  const [updateInfo, setUpdateInfo] = useState(null);
+
+  const { data: instructorClasses = [], refetch } = useQuery({
     queryKey: ["classes"],
     enabled: !loading,
     queryFn: async () => {
@@ -18,11 +22,16 @@ const InstructorAddedClass = () => {
       return res.data;
     },
   });
-  console.log(instructorClasses);
 
   const closeModalFeedback = () => {
     setModalFeedback(false);
   };
+
+  const closeModalUpdate = () => {
+    setUpdateModal(false);
+    setUpdateInfo(null)
+  };
+
   return (
     <>
       <Title
@@ -81,7 +90,13 @@ const InstructorAddedClass = () => {
                   {classes?.status}
                 </td>
                 <th>
-                  <button className="btn bg-red-500 hover:bg-red-600 text-gray-50 btn-xs">
+                  <button
+                    onClick={() => {
+                      setUpdateInfo(classes);
+                      setUpdateModal(true);
+                    }}
+                    className="btn bg-red-500 hover:bg-red-600 text-gray-50 btn-xs"
+                  >
                     Update
                   </button>
                 </th>
@@ -106,6 +121,13 @@ const InstructorAddedClass = () => {
         isOpen={modalFeedback}
         closeModal={closeModalFeedback}
         feedback={feedback}
+      />
+
+      <UpdateByInstructorModal
+        isOpen={updateModal}
+        closeModal={closeModalUpdate}
+        updateInfo={updateInfo}
+        refetch={refetch}
       />
     </>
   );

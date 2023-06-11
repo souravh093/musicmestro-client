@@ -5,6 +5,8 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import AdminMenu from "./DashboardMenu/AdminMenu";
 import InstructorMenu from "./DashboardMenu/InstructorMenu";
 import StudentMenu from "./DashboardMenu/StudentMenu";
+import { HiOutlineLogout } from "react-icons/hi";
+import { GiSing } from "react-icons/gi";
 
 const Dashboard = () => {
   const { user, adminRole, instructorRole, logoutUser } =
@@ -14,6 +16,7 @@ const Dashboard = () => {
     logoutUser();
     navigate("/");
   };
+
   return (
     <>
       <nav className="fixed top-0 z-50 w-full border-b bg-gray-800 border-gray-700">
@@ -65,23 +68,23 @@ const Dashboard = () => {
             )}
           </div>
           <ul className="space-y-2 font-medium ">
-            {!adminRole &&
-              (!instructorRole && (
-                <li>
-                  <NavLink to="/classes"
-                    className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
-                  >
-                    <span className="ml-3">Select Classes</span>
-                  </NavLink>
-                </li>
-              ))}
+            {!adminRole && !instructorRole && (
+              <li>
+                <NavLink
+                  to="/classes"
+                  className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
+                >
+                  <span className="ml-3 flex items-center gap-2"><GiSing /> Select Classes</span>
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink
                 onClick={signOutUser}
                 className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
               >
                 <button>
-                  <span className="ml-3">Logout</span>
+                  <span className="ml-3 flex items-center gap-2"><HiOutlineLogout /> Logout</span>
                 </button>
               </NavLink>
             </li>

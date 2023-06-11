@@ -30,21 +30,20 @@ const Register = () => {
     const formData = new FormData();
     formData.append("image", data.photoUrl[0]);
 
-    axios.post(imageUrl, formData)
-  .then((dataImage) => {
-    createUser(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
-        updateUser(data.name, dataImage.data.data.display_url)
-          .then(() => {
-            saveUser(result.user, dataImage.data.data.display_url); 
-            toast.success("Successfully Sign Up");
-            navigate("/");
-          })
-          .catch((error) => setError(error.message));
-      })
-      .catch((error) => setError(error.message));
-  });
+    axios.post(imageUrl, formData).then((dataImage) => {
+      createUser(data.email, data.password)
+        .then((result) => {
+          console.log(result.user);
+          updateUser(data.name, dataImage.data.data.display_url)
+            .then(() => {
+              saveUser(result.user, dataImage.data.data.display_url);
+              toast.success("Successfully Sign Up");
+              navigate("/");
+            })
+            .catch((error) => setError(error.message));
+        })
+        .catch((error) => setError(error.message));
+    });
 
     // axios.post(imageUrl, formData).then((dataImage) => {
     //   createUser(data.email, data.password)
