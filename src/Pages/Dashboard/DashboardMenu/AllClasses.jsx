@@ -5,6 +5,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import FeedbackModal from "../../../components/Modal/FeedbackModal";
+import { Helmet } from "react-helmet-async";
 
 const AllClasses = () => {
   const { user, loading } = useContext(AuthContext);
@@ -45,6 +46,9 @@ const AllClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>MusicMaestro | All Classes</title>
+      </Helmet>
       <Title
         title={"All Classes"}
         subTitle={"Here is all class added by instructor website"}
@@ -117,7 +121,7 @@ const AllClasses = () => {
                   <button
                     onClick={() => {
                       setFeedbackModal(true);
-                      setId(item?._id)
+                      setId(item?._id);
                     }}
                     className="btn bg-violet-500 text-white hover:bg-violet-600 btn-xs"
                   >

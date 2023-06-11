@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import Container from "../../components/Shared/Container/Container";
 import ProfileCard from "../../components/Shared/ProfileCard/ProfileCard";
+import { Helmet } from "react-helmet-async";
 
 const Instructors = () => {
   const { loading } = useContext(AuthContext);
@@ -21,6 +22,9 @@ const Instructors = () => {
 
   return (
     <div>
+      <Helmet>
+          <title>MusicMaestro | Instructors</title>
+        </Helmet>
       <TitleBanner
         title={"All Instructor"}
         subtitle={"Here is world best singer and instructor"}

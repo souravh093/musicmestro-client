@@ -9,6 +9,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
   const { user, loading } = useContext(AuthContext);
@@ -63,7 +64,8 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${import.meta.env.VITE_BASE_URL}/users/${id}`)
+        axios
+          .delete(`${import.meta.env.VITE_BASE_URL}/users/${id}`)
           .then((data) => {
             refetch();
             console.log(data);
@@ -75,6 +77,9 @@ const AllUsers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>MusicMaestro | All Users</title>
+      </Helmet>
       <Title
         title={"All Users"}
         subTitle={"Here is all users login this website"}

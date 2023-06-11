@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const imageToken = import.meta.env.VITE_UPLOAD_TOKEN;
 
@@ -46,13 +47,13 @@ const AddClasses = () => {
             instructorEmail,
             instructorName,
             availableSeats: parseFloat(availableSeats),
-            status: "pending"
+            status: "pending",
           };
 
           axiosSecure.post("/classes", newClass).then((data) => {
             if (data.data.insertedId) {
               reset();
-              toast.success("Successfully added class")
+              toast.success("Successfully added class");
             }
           });
         }
@@ -66,6 +67,9 @@ const AddClasses = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>MusicMaestro | Add Class</title>
+      </Helmet>
       <Title
         title={"Add Classes"}
         subTitle={"Add Signing Class to you expertise"}

@@ -7,6 +7,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-hot-toast";
 import { saveUser } from "../../../api/auth";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const imagToken = import.meta.env.VITE_UPLOAD_TOKEN;
 
@@ -57,165 +58,175 @@ const Register = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className=" bg-gray-200">
-        <img
-          src={registerImage}
-          alt="Background"
-          className="h-full w-full object-cover"
-        />
-      </div>
-      <div className=" flex flex-col justify-center items-center p-10">
-        <h2 className="text-5xl font-bold mb-4">Register</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
-          <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              {...register("name", { required: "Name is required" })}
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                errors.name ? "border-red-500" : ""
-              }`}
-            />
-            {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              {...register("email", {
-                required: "Email is required",
-              })}
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                errors.email ? "border-red-500" : ""
-              }`}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              {...register("password", {
-                required: "Password is required",
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/,
-                  message:
-                    "Password must contain at least 6 characters, including one capital letter and one special character",
-                },
-              })}
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                errors.password ? "border-red-500" : ""
-              }`}
-            />
-            {errors.password && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="confirm-password"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirm-password"
-              {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                validate: (value) =>
-                  value === password.current || "The passwords do not match",
-              })}
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                errors.confirmPassword ? "border-red-500" : ""
-              }`}
-            />
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.confirmPassword.message}
-              </p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="photo-url"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Photo URL
-            </label>
-            <input
-              type="file"
-              id="photo-url"
-              {...register("photoUrl", { required: "Photo URL is required" })}
-              className={`file-input file-input-bordered w-full max-w-full  ${
-                errors.photoUrl ? "border-red-500" : ""
-              }`}
-            />
-            {errors.photoUrl && (
-              <p className="text-red-500 text-xs mt-1">Photo URL is required</p>
-            )}
-          </div>
-          <div className="mb-6">
-            <button
-              type="submit"
-              className="bg-violet-500 w-full hover:bg-violet-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Register
-            </button>
-          </div>
-          <div className="flex justify-center mb-5">
-            <div>
-              <span className="mr-2">Already a member?</span>
-              <Link
-                to="/login"
-                className="inline-block align-baseline font-bold text-sm text-violet-500 hover:text-violet-800"
+    <>
+      <Helmet>
+        <title>MusicMaestro | Sign Up</title>
+      </Helmet>
+      <div className="grid grid-cols-2 h-screen">
+        <div className=" bg-gray-200">
+          <img
+            src={registerImage}
+            alt="Background"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div className=" flex flex-col justify-center items-center p-10">
+          <h2 className="text-5xl font-bold mb-4">Register</h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Sign In
-              </Link>
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                {...register("name", { required: "Name is required" })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.name ? "border-red-500" : ""
+                }`}
+              />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
-          </div>
-          <div className="flex items-center">
-            <button
-              onClick={signUpWithGoogle}
-              type="button"
-              className="bg-gray-100 text-gray-700 border flex items-center w-full justify-center border-violet-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              //   onClick={handleGoogleLogin}
-            >
-              <FcGoogle className="w-4 h-4 fill-current mr-2" />
-              Sign In with Google
-            </button>
-          </div>
-        </form>
-        <p className="text-red-500">{error}</p>
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                {...register("email", {
+                  required: "Email is required",
+                })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.email ? "border-red-500" : ""
+                }`}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                {...register("password", {
+                  required: "Password is required",
+                  pattern: {
+                    value:
+                      /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/,
+                    message:
+                      "Password must contain at least 6 characters, including one capital letter and one special character",
+                  },
+                })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.password ? "border-red-500" : ""
+                }`}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="confirm-password"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirm-password"
+                {...register("confirmPassword", {
+                  required: "Confirm Password is required",
+                  validate: (value) =>
+                    value === password.current || "The passwords do not match",
+                })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.confirmPassword ? "border-red-500" : ""
+                }`}
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="photo-url"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Photo URL
+              </label>
+              <input
+                type="file"
+                id="photo-url"
+                {...register("photoUrl", { required: "Photo URL is required" })}
+                className={`file-input file-input-bordered w-full max-w-full  ${
+                  errors.photoUrl ? "border-red-500" : ""
+                }`}
+              />
+              {errors.photoUrl && (
+                <p className="text-red-500 text-xs mt-1">
+                  Photo URL is required
+                </p>
+              )}
+            </div>
+            <div className="mb-6">
+              <button
+                type="submit"
+                className="bg-violet-500 w-full hover:bg-violet-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Register
+              </button>
+            </div>
+            <div className="flex justify-center mb-5">
+              <div>
+                <span className="mr-2">Already a member?</span>
+                <Link
+                  to="/login"
+                  className="inline-block align-baseline font-bold text-sm text-violet-500 hover:text-violet-800"
+                >
+                  Sign In
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <button
+                onClick={signUpWithGoogle}
+                type="button"
+                className="bg-gray-100 text-gray-700 border flex items-center w-full justify-center border-violet-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                //   onClick={handleGoogleLogin}
+              >
+                <FcGoogle className="w-4 h-4 fill-current mr-2" />
+                Sign In with Google
+              </button>
+            </div>
+          </form>
+          <p className="text-red-500">{error}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

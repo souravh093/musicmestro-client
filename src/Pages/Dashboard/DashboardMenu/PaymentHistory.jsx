@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import Container from "../../../components/Shared/Container/Container";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const { user, loading } = useContext(AuthContext);
@@ -17,10 +18,12 @@ const PaymentHistory = () => {
     },
   });
 
-
   console.log(paymentHistory);
   return (
     <div>
+      <Helmet>
+        <title>MusicMaestro | Enrolled Classes</title>
+      </Helmet>
       <Title
         title={"My Enrolled Classes"}
         subTitle={"Here is your all payment history"}

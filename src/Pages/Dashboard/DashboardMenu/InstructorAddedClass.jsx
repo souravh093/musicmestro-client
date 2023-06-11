@@ -5,6 +5,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../../hook/useAxiosSecure";
 import ShowFeedBackModal from "../../../components/Modal/ShowFeedBackModal";
 import UpdateByInstructorModal from "../../../components/Modal/UpdateByInstructorModal";
+import { Helmet } from "react-helmet-async";
 
 const InstructorAddedClass = () => {
   const { loading, user } = useContext(AuthContext);
@@ -34,6 +35,9 @@ const InstructorAddedClass = () => {
 
   return (
     <>
+    <Helmet>
+          <title>MusicMaestro | My Class</title>
+        </Helmet>
       <Title
         title={"My Classes"}
         subTitle={"Here is your all Classes you added"}

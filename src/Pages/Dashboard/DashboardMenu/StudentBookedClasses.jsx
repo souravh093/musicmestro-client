@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import CheckoutModal from "../../../components/Modal/CheckoutModal";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const StudentBookedClasses = () => {
   const { user } = useContext(AuthContext);
@@ -44,6 +45,9 @@ const StudentBookedClasses = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>MusicMaestro | Booked Class</title>
+      </Helmet>
       <Title
         title={"All Booked Classes"}
         subTitle={"Here is you all Booked class"}

@@ -7,6 +7,7 @@ import InstructorMenu from "./DashboardMenu/InstructorMenu";
 import StudentMenu from "./DashboardMenu/StudentMenu";
 import { HiOutlineLogout } from "react-icons/hi";
 import { GiSing } from "react-icons/gi";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const { user, adminRole, instructorRole, logoutUser } =
@@ -19,6 +20,9 @@ const Dashboard = () => {
 
   return (
     <>
+      <Helmet>
+        <title>MusicMaestro | Dashboard</title>
+      </Helmet>
       <nav className="fixed top-0 z-50 w-full border-b bg-gray-800 border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
@@ -74,7 +78,9 @@ const Dashboard = () => {
                   to="/classes"
                   className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
                 >
-                  <span className="ml-3 flex items-center gap-2"><GiSing /> Select Classes</span>
+                  <span className="ml-3 flex items-center gap-2">
+                    <GiSing /> Select Classes
+                  </span>
                 </NavLink>
               </li>
             )}
@@ -84,7 +90,9 @@ const Dashboard = () => {
                 className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-700`}
               >
                 <button>
-                  <span className="ml-3 flex items-center gap-2"><HiOutlineLogout /> Logout</span>
+                  <span className="ml-3 flex items-center gap-2">
+                    <HiOutlineLogout /> Logout
+                  </span>
                 </button>
               </NavLink>
             </li>

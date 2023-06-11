@@ -5,6 +5,7 @@ import axios from "axios";
 import TitleBanner from "../../components/TitleBanner/TitleBanner";
 import Container from "../../components/Shared/Container/Container";
 import ClassesCard from "../../components/Shared/ClassesCard/ClassesCard";
+import { Helmet } from "react-helmet-async";
 
 const Classes = () => {
   const { loading } = useContext(AuthContext);
@@ -21,6 +22,9 @@ const Classes = () => {
   });
   return (
     <div>
+      <Helmet>
+          <title>MusicMaestro | Classes</title>
+        </Helmet>
       <TitleBanner
         title={"All Classes"}
         subtitle={"Here are all classes by world best instructor and singer"}
