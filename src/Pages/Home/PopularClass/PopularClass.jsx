@@ -2,14 +2,16 @@ import React from "react";
 import Container from "../../../components/Shared/Container/Container";
 import Title from "../../../components/Title/Title";
 import { useQuery } from "react-query";
-import axios from "axios";
 import ClassesCard from "../../../components/Shared/ClassesCard/ClassesCard";
+import { useAxiosSecure } from "../../../hook/useAxiosSecure";
+
 
 const PopularClass = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axios("classes.json");
+      const res = await axiosSecure("/classeslimit");
       return res.data;
     },
   });

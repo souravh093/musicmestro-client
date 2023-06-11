@@ -29,7 +29,7 @@ const InstructorAddedClass = () => {
 
   const closeModalUpdate = () => {
     setUpdateModal(false);
-    setUpdateInfo(null)
+    setUpdateInfo(null);
   };
 
   return (
@@ -123,12 +123,14 @@ const InstructorAddedClass = () => {
         feedback={feedback}
       />
 
-      <UpdateByInstructorModal
-        isOpen={updateModal}
-        closeModal={closeModalUpdate}
-        updateInfo={updateInfo}
-        refetch={refetch}
-      />
+      {updateInfo && (
+        <UpdateByInstructorModal
+          isOpen={updateModal}
+          closeModal={closeModalUpdate}
+          updateInfo={updateInfo}
+          refetch={refetch}
+        />
+      )}
     </>
   );
 };

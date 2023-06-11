@@ -7,7 +7,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import Container from "../../../components/Shared/Container/Container";
 import { SiMinutemailer } from "react-icons/si";
-import bg from "../../../assets/bg.jpg"
+import bg from "../../../assets/bg.jpg";
+import { motion } from "framer-motion";
 
 const Slider = () => {
   const { data: sliderData = [] } = useQuery({
@@ -18,7 +19,7 @@ const Slider = () => {
     },
   });
   return (
-    <div className="py-10"  style={{ backgroundImage: `url(${bg})` }}>
+    <div className="py-10" style={{ backgroundImage: `url(${bg})` }}>
       <Container>
         <Swiper
           loop={true}
@@ -34,18 +35,30 @@ const Slider = () => {
             <SwiperSlide key={slider.id}>
               <div className="grid md:grid-cols-2 items-center justify-between">
                 <div>
-                  <h2 className="text-4xl font-semibold dark:text-black">{slider.subtitle}</h2>
-                  <h1 className="text-7xl font-bold mb-5 dark:text-black">{slider.title}</h1>
-                  <p className="text-lg max-w-xl mb-5 dark:text-black">{slider.description}</p>
-                  <button className="bg-violet-700 dark:hover:shadow-xl dark:bg-gray-800 flex items-center gap-3 text-gray-200 py-3 px-10 rounded-2xl">
+                  <h2 className="text-4xl font-semibold dark:text-black">
+                    {slider.subtitle}
+                  </h2>
+                  <h1 className="text-7xl font-bold mb-5 dark:text-black">
+                    {slider.title}
+                  </h1>
+                  <p className="text-lg max-w-xl mb-5 dark:text-black">
+                    {slider.description}
+                  </p>
+                  <motion.button
+                    whileHover={{ scale: 1.1, backgroundColor: "black" }}
+                    whileTap={{ scale: 0.9 }}
+                    className="bg-violet-700 dark:hover:shadow-xl dark:bg-gray-800 flex items-center gap-3 text-gray-200 py-3 px-10 rounded-2xl"
+                  >
                     Discover More <SiMinutemailer />{" "}
-                  </button>
+                  </motion.button>
                 </div>
                 <div>
-                  <img
+                  <motion.img
                     className="w-full h-[40rem] object-contain"
                     src={slider.image}
-                    alt=""
+                    alt="slider image"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   />
                 </div>
               </div>

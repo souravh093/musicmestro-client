@@ -61,7 +61,6 @@ const AllClasses = () => {
               <th>Available Seats</th>
               <th>Price</th>
               <th>Status</th>
-              <th>Enrolled Students</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -114,7 +113,6 @@ const AllClasses = () => {
                     </button>
                   </div>
                 </td>
-                <td>{0}</td>
                 <th>
                   <button
                     onClick={() => {

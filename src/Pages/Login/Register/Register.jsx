@@ -44,18 +44,6 @@ const Register = () => {
         })
         .catch((error) => setError(error.message));
     });
-
-    // axios.post(imageUrl, formData).then((dataImage) => {
-    //   createUser(data.email, data.password)
-    //     .then((result) => {
-    //       console.log(result.user);
-    //       updateUser(data.name, dataImage.data.data.display_url);
-    //       saveUser(result.user);
-    //       toast.success("Successfully Sign Up");
-    //       navigate("/");
-    //     })
-    //     .catch((error) => setError(error.message));
-    // });
   };
 
   const signUpWithGoogle = () => {
@@ -111,10 +99,6 @@ const Register = () => {
               id="email"
               {...register("email", {
                 required: "Email is required",
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: "Invalid email",
-                },
               })}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 errors.email ? "border-red-500" : ""
@@ -190,7 +174,7 @@ const Register = () => {
               type="file"
               id="photo-url"
               {...register("photoUrl", { required: "Photo URL is required" })}
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              className={`file-input file-input-bordered w-full max-w-full  ${
                 errors.photoUrl ? "border-red-500" : ""
               }`}
             />

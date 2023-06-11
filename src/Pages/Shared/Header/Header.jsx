@@ -5,6 +5,7 @@ import Container from "../../../components/Shared/Container/Container";
 import ProfileImage from "./ProfileImage/ProfileImage";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useCart } from "../../../hook/useCart";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const { user, logoutUser, adminRole, instructorRole } =
@@ -17,7 +18,7 @@ const Header = () => {
 
   const navigation = (
     <>
-      <li>
+      <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -30,8 +31,8 @@ const Header = () => {
         >
           Home
         </NavLink>
-      </li>
-      <li>
+      </motion.li>
+      <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
         <NavLink
           to="/instructors"
           className={({ isActive }) =>
@@ -44,8 +45,8 @@ const Header = () => {
         >
           Instructors
         </NavLink>
-      </li>
-      <li>
+      </motion.li>
+      <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
         <NavLink
           to="/classes"
           className={({ isActive }) =>
@@ -58,7 +59,7 @@ const Header = () => {
         >
           Classes
         </NavLink>
-      </li>
+      </motion.li>
     </>
   );
 
@@ -133,9 +134,23 @@ const Header = () => {
                   </li>
                 </div>
               ) : (
-                <li>
-                  <NavLink to="/login">Login</NavLink>
-                </li>
+                <motion.li
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive
+                          ? "border-b-2 border-violet-800 text-gray-800"
+                          : "text-gray-600"
+                      }`
+                    }
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                </motion.li>
               )}
               <label className="swap swap-rotate">
                 <input onChange={handleToggle} type="checkbox" />
