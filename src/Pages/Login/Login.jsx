@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Container from "../../components/Shared/Container/Container";
@@ -8,11 +8,14 @@ import { toast } from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { saveUser } from "../../api/auth";
 import { Helmet } from "react-helmet-async";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const { loginUser, googleLoginUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   const from = location.state?.from?.pathname || "/";
 
@@ -23,11 +26,13 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    loginUser(data.email, data.password).then((result) => {
-      console.log(result.user);
-      toast.success("Successfully Login");
-      navigate(from, { replace: true });
-    });
+    loginUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("Successfully Login");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => setError(error.message));
   };
 
   const loginWithGoogle = () => {
@@ -88,16 +93,29 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  {...register("password", {
-                    required: "Password is required",
-                  })}
-                  className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                    errors.password ? "border-red-500" : ""
-                  }`}
-                />
+                <div className="relative">
+                  <input
+                    type={toggle ? "text" : "password"}
+                    id="password"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                      errors.password ? "border-red-500" : ""
+                    }`}
+                  />
+                  <div
+                    onClick={() => setToggle(!toggle)}
+                    className="cursor-pointer absolute right-5 top-3"
+                  >
+                    {toggle ? (
+                      <AiFillEye className="text-xl" />
+                    ) : (
+                      <AiFillEyeInvisible className="text-xl" />
+                    )}
+                  </div>
+                </div>
+
                 {errors.password && (
                   <p className="text-red-500 text-xs mt-1">
                     {errors.password.message}
@@ -111,6 +129,8 @@ const Login = () => {
                 >
                   Sign In
                 </button>
+                <p className="text-red-500">{error}</p>
+
                 <div className="flex justify-center">
                   <div>
                     <span className="mr-2">Not a member?</span>

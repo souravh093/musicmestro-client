@@ -81,7 +81,7 @@ const ClassesCard = ({ data }) => {
       initial={{ opacity: 0, y: 100 }}
       animate={controls}
       transition={{ duration: 0.5 }}
-      className="card w-full bg-base-100 shadow-xl group"
+      className={`card w-full bg-base-100 shadow-xl group ${availableSeats <= 0 && "bg-red-500"}`}
     >
       <figure>
         <motion.img
@@ -104,7 +104,7 @@ const ClassesCard = ({ data }) => {
           </p>
         </div>
         <button
-          disabled={adminRole || instructorRole}
+          disabled={adminRole || instructorRole || availableSeats <= 0}
           onClick={() => handleClass(_id)}
           className="btn bg-violet-700 hover:bg-violet-600 text-gray-100 mt-4"
         >

@@ -6,6 +6,7 @@ import ProfileImage from "./ProfileImage/ProfileImage";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useCart } from "../../../hook/useCart";
 import { motion } from "framer-motion";
+import { RiLoginCircleFill } from "react-icons/ri";
 
 const Header = () => {
   const { user, logoutUser, adminRole, instructorRole } =
@@ -22,9 +23,9 @@ const Header = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `${
+            `hover:text-violet-700 ${
               isActive
-                ? "border-b-2 border-violet-800 text-gray-800"
+                ? "border-b-2 text-violet-700 border-violet-800"
                 : "text-gray-600"
             }`
           }
@@ -36,9 +37,9 @@ const Header = () => {
         <NavLink
           to="/instructors"
           className={({ isActive }) =>
-            `${
+            `hover:text-violet-700 ${
               isActive
-                ? "border-b-2 border-violet-800 text-gray-800"
+                ? "border-b-2 border-violet-800 text-violet-700"
                 : "text-gray-600"
             }`
           }
@@ -50,9 +51,9 @@ const Header = () => {
         <NavLink
           to="/classes"
           className={({ isActive }) =>
-            `${
+            `hover:text-violet-700 ${
               isActive
-                ? "border-b-2 border-violet-800 text-gray-800"
+                ? "border-b-2 border-violet-800 text-violet-700"
                 : "text-gray-600"
             }`
           }
@@ -123,13 +124,13 @@ const Header = () => {
                       </div>
                     </li>
                   )}
-                  <li>
+                  <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <NavLink to="/dashboard">Dashboard</NavLink>
-                  </li>
-                  <li>
+                  </motion.li>
+                  <motion.li className="tooltip tooltip-bottom transition" data-tip={user.displayName} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                     <ProfileImage />
-                  </li>
-                  <li>
+                  </motion.li>
+                  <li className="btn bg-violet-700 text-white hover:bg-violet-600 flex items-center gap-1">
                     <button onClick={signOutUser}>Logout</button>
                   </li>
                 </div>
@@ -140,15 +141,15 @@ const Header = () => {
                 >
                   <NavLink
                     className={({ isActive }) =>
-                      `${
+                      `btn bg-violet-700 text-white hover:bg-violet-700 flex items-center gap-1 ${
                         isActive
-                          ? "border-b-2 border-violet-800 text-gray-800"
+                          ? "border-b-2 border-violet-800 text-violet-700"
                           : "text-gray-600"
                       }`
                     }
                     to="/login"
                   >
-                    Login
+                     Login<RiLoginCircleFill className="text-xl" />
                   </NavLink>
                 </motion.li>
               )}
