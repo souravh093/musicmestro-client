@@ -136,6 +136,7 @@ const StudentBookedClasses = () => {
         isOpen={isOpen}
         classInfo={classInfo}
         closeModal={closeModal}
+        carts={carts}
       />
     </div>
   );

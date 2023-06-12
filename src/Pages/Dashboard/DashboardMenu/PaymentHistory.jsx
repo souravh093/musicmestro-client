@@ -18,14 +18,13 @@ const PaymentHistory = () => {
     },
   });
 
-  console.log(paymentHistory);
   return (
     <div>
       <Helmet>
-        <title>MusicMaestro | Enrolled Classes</title>
+        <title>MusicMaestro | Payment History</title>
       </Helmet>
       <Title
-        title={"My Enrolled Classes"}
+        title={"Payment History"}
         subTitle={"Here is your all payment history"}
       />
       <Container>

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { BsCartCheckFill } from 'react-icons/bs';
 import { AiFillDashboard } from 'react-icons/ai';
-import { MdPayment } from 'react-icons/md';
+import { MdDone, MdPayment } from 'react-icons/md';
 
 import { useCart } from "../../../hook/useCart";
 
@@ -37,6 +37,18 @@ const StudentMenu = () => {
       </li>
       <li>
         <NavLink
+          to="/dashboard/studentinrollclass"
+          className={({ isActive }) =>
+            `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
+              isActive ? "border-2 text-gray-800" : "text-gray-600"
+            }`
+          }
+        >
+          <span className="flex-1 ml-3 whitespace-nowrap flex items-center gap-2"><MdDone /> My enrolled Classes</span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard/paymenthistory"
           className={({ isActive }) =>
             `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
@@ -44,7 +56,7 @@ const StudentMenu = () => {
             }`
           }
         >
-          <span className="flex-1 ml-3 whitespace-nowrap flex items-center gap-2"><MdPayment /> My Enrolled Classes</span>
+          <span className="flex-1 ml-3 whitespace-nowrap flex items-center gap-2"><MdPayment />Payment History</span>
         </NavLink>
       </li>
     </ul>

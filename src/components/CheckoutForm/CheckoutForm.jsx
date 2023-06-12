@@ -5,7 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const CheckoutForm = ({ classInfo, closeModal }) => {
+const CheckoutForm = ({ classInfo, closeModal, carts }) => {
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -73,7 +73,6 @@ const CheckoutForm = ({ classInfo, closeModal }) => {
     } else {
       console.log("[PaymentMethod]", paymentMethod);
       if (paymentIntent.status === "succeeded") {
-        console.log("payment successfully");
         // save payment information in database
         const paymentInfo = {
           ...classInfo,
