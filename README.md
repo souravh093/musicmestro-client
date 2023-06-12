@@ -6,8 +6,6 @@
 
 # Live Site Link: https://musicmaestro-2b4f6.web.app/
 
-Short description or tagline for your project.
-
 ## Website Feature
 
 * This website is Music summer camp school MERN Website
