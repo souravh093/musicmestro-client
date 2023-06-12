@@ -8,7 +8,7 @@ const Title = ({ title, subTitle }) => {
   };
   return (
     <motion.div
-      className="flex justify-center text-center my-16"
+      className="flex dark:text-primary justify-center text-center my-16"
       initial="hidden"
       animate="visible"
       transition={{ duration: 1 }} 

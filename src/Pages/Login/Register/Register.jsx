@@ -62,7 +62,7 @@ const Register = () => {
       <Helmet>
         <title>MusicMaestro | Sign Up</title>
       </Helmet>
-      <div className="grid grid-cols-2 h-screen">
+      <div className="grid md:grid-cols-2 md:h-screen">
         <div className=" bg-gray-200">
           <img
             src={registerImage}

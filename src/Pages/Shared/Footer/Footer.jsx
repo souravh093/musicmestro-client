@@ -6,10 +6,13 @@ const Footer = () => {
     <footer className="footer p-10 bg-base-200 text-base-content mt-10">
       <div>
         <img className="w-12" src={logo} alt="" />
+        <h2 className="text-xl">MusicMaestro</h2>
         <p>
           MusicMaestro Learning singing summer camp school
           <br />
           Providing reliable tech since 2023
+          <br />
+          &copy; 2023 MusicMaestro. All rights reserved.
         </p>
       </div>
       <div>

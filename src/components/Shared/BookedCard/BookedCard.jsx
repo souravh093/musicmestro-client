@@ -9,10 +9,10 @@ const BookedCard = ({ data }) => {
             <thead>
               <tr>
                 <th>Image</th>
-                <th>Name</th>
-                <th>Transaction Id</th>
-                <th>Payed</th>
-                <th>Status</th>
+                <th>Class Name</th>
+                <th>Instructor Name</th>
+                <th>Price</th>
+                <th>Available Seats</th>
               </tr>
             </thead>
             <tbody>
@@ -31,7 +31,7 @@ const BookedCard = ({ data }) => {
                     </div>
                   </td>
                   <td>{i.className}</td>
-                  <td>{i.InstructorEmail}</td>
+                  <td>{i.instructorName}</td>
                   <td>${i.price}</td>
                   <td>{i.availableSeats}</td>
                 </tr>

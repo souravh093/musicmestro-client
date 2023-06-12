@@ -49,15 +49,15 @@ const Login = () => {
         <title>MusicMaestro | Login</title>
       </Helmet>
       <Container>
-        <div className="flex h-screen">
-          <div className="w-1/2 bg-gray-200">
+        <div className="grid md:grid-cols-2 h-screen">
+          <div className=" bg-gray-200">
             <img
               src={loginImage}
               alt="Background"
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="w-1/2 flex flex-col justify-center items-center p-10">
+          <div className="flex flex-col justify-center items-center p-10">
             <h2 className="text-5xl font-bold mb-4">Login</h2>
             <form
               onSubmit={handleSubmit(onSubmit)}

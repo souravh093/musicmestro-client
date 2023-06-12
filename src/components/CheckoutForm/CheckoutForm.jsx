@@ -5,7 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { useAxiosSecure } from "../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const CheckoutForm = ({ classInfo, closeModal, carts }) => {
+const CheckoutForm = ({ classInfo, closeModal, cartRefetch }) => {
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -95,6 +95,8 @@ const CheckoutForm = ({ classInfo, closeModal, carts }) => {
             axiosSecure.put("/totalenrollstudent", paymentInfo).then((res) => {
               console.log(res.data);
             });
+
+            cartRefetch()
 
             closeModal();
           }

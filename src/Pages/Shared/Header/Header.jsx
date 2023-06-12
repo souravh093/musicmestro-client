@@ -7,8 +7,11 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useCart } from "../../../hook/useCart";
 import { motion } from "framer-motion";
 import { RiLoginCircleFill } from "react-icons/ri";
+import { FaAlignJustify } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Header = () => {
+  const [toggle, setToggle] = useState(false);
   const { user, logoutUser, adminRole, instructorRole } =
     useContext(AuthContext);
   const [carts] = useCart();
@@ -83,17 +86,17 @@ const Header = () => {
   }, [theme]);
 
   return (
-    <div className="py-2 border-b-2">
+    <div className="py-2 border-b-2 fixed dark:bg-primary bg-white z-10 w-full">
       <Container>
         <div className="flex justify-between items-center">
           <Link to="/">
             <Logo />
           </Link>
-          <div className="flex list-none gap-10">{navigation}</div>
+          <div className="hidden md:flex list-none gap-10">{navigation}</div>
           <div className="flex gap-10 list-none">
             <div className="flex gap-4 items-center">
               {user ? (
-                <div className="flex items-center gap-2">
+                <div className="md:flex hidden items-center gap-2">
                   {!adminRole && !instructorRole && (
                     <li>
                       <div>
@@ -124,10 +127,18 @@ const Header = () => {
                       </div>
                     </li>
                   )}
-                  <motion.li whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <motion.li
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
                     <NavLink to="/dashboard">Dashboard</NavLink>
                   </motion.li>
-                  <motion.li className="tooltip tooltip-bottom transition" data-tip={user.displayName} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <motion.li
+                    className="tooltip tooltip-bottom transition"
+                    data-tip={user.displayName}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
                     <ProfileImage />
                   </motion.li>
                   <li className="btn bg-violet-700 text-white hover:bg-violet-600 flex items-center gap-1">
@@ -136,6 +147,7 @@ const Header = () => {
                 </div>
               ) : (
                 <motion.li
+                  className="md:block hidden"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -149,10 +161,99 @@ const Header = () => {
                     }
                     to="/login"
                   >
-                     Login<RiLoginCircleFill className="text-xl" />
+                    Login
+                    <RiLoginCircleFill className="text-xl" />
                   </NavLink>
                 </motion.li>
               )}
+              <button
+                onClick={() => setToggle(!toggle)}
+                className="md:hidden block transition"
+              >
+                {toggle ? (
+                  <AiOutlineClose className="text-2xl" />
+                ) : (
+                  <FaAlignJustify className="text-2xl" />
+                )}
+
+                {toggle && (
+                  <div className="md:hidden block absolute right-0 px-20 py-10 border border-violet-500 shadow-md top-[84px] bg-white">
+                    <div>{navigation}</div>
+                    <div>
+                      {user ? (
+                        <div className="flex flex-col items-center gap-2">
+                          {!adminRole && !instructorRole && (
+                            <li>
+                              <div>
+                                <Link
+                                  to="/dashboard/studentclasses"
+                                  className="btn btn-ghost hover:bg-violet-500/50 border-none btn-circle"
+                                >
+                                  <div className="indicator">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-5 w-5"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                                      />
+                                    </svg>
+                                    <span className="badge badge-sm indicator-item bg-violet-700 text-white">
+                                      {carts?.length || 0}
+                                    </span>
+                                  </div>
+                                </Link>
+                              </div>
+                            </li>
+                          )}
+                          <motion.li
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <NavLink to="/dashboard">Dashboard</NavLink>
+                          </motion.li>
+                          <motion.li
+                            className="tooltip tooltip-bottom transition"
+                            data-tip={user.displayName}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <ProfileImage />
+                          </motion.li>
+                          <li className="btn bg-violet-700 text-white hover:bg-violet-600 flex items-center gap-1">
+                            <button onClick={signOutUser}>Logout</button>
+                          </li>
+                        </div>
+                      ) : (
+                        <motion.li
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <NavLink
+                            className={({ isActive }) =>
+                              `btn bg-violet-700 text-white hover:bg-violet-700 flex items-center gap-1 ${
+                                isActive
+                                  ? "border-b-2 border-violet-800 text-violet-700"
+                                  : "text-gray-600"
+                              }`
+                            }
+                            to="/login"
+                          >
+                            Login
+                            <RiLoginCircleFill className="text-xl" />
+                          </NavLink>
+                        </motion.li>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </button>
               <label className="swap swap-rotate">
                 <input onChange={handleToggle} type="checkbox" />
                 <svg

@@ -137,6 +137,7 @@ const StudentBookedClasses = () => {
         classInfo={classInfo}
         closeModal={closeModal}
         carts={carts}
+        cartRefetch={cartRefetch}
       />
     </div>
   );
