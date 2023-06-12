@@ -12,7 +12,7 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [modalAdmin, setModalAdmin] = useState(false);
   const [modalInstructor, setModalInstructor] = useState(false);
   const [email, setEmail] = useState("");
@@ -97,7 +97,7 @@ const AllUsers = () => {
       </div>
     );
   }
-  
+
   return (
     <div>
       <Helmet>

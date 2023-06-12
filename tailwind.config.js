@@ -9,14 +9,14 @@ export default {
     themes: [
       {
         dark: {
-          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
-          primary: "white"
+          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+          primary: "black"
         },
       },
       {
         light: {
-          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
-          primary: "black",
+          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+          primary: "white",
         },
       },
       "light",

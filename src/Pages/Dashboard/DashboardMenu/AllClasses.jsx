@@ -148,6 +148,7 @@ const AllClasses = () => {
                       setId(item?._id);
                     }}
                     className="btn bg-violet-500 text-white hover:bg-violet-600 btn-xs"
+                    disabled={ item.status === "pending"}
                   >
                     Feedback
                   </button>

@@ -24,7 +24,6 @@ const ProfileCard = ({ data }) => {
       observer.observe(cardRef.current);
     }
 
-    // Cleanup the observer on component unmount
     return () => {
       if (cardRef.current) {
         observer.unobserve(cardRef.current);

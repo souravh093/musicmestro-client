@@ -92,7 +92,7 @@ const Header = () => {
           <Link to="/">
             <Logo />
           </Link>
-          <div className="hidden md:flex list-none gap-10">{navigation}</div>
+          <div className="hidden md:flex list-none dark:text-gray-100 gap-10">{navigation}</div>
           <div className="flex gap-10 list-none">
             <div className="flex gap-4 items-center">
               {user ? (

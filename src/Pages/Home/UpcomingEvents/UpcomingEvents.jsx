@@ -62,12 +62,8 @@ const UpcomingEvents = () => {
                 </div>
                 <div className="flex justify-center items-center">
                   <div className="text-center">
-                    <h2 className="text-6xl font-bold text-violet-500">
-                      {event.eventDate}
-                    </h2>
-                    <h3 className="text-2xl text-violet-400 font-semibold">
-                      {event.month}
-                    </h3>
+                    <h2 className="text-6xl font-bold text-violet-500">{event.eventDate}</h2>
+                    <h3 className="text-2xl text-violet-400 font-semibold">{event.month}</h3>
                   </div>
                 </div>
               </div>
